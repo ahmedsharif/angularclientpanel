@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 
 import { Client } from '../models/Client';
 
@@ -12,10 +13,10 @@ export class ClientService {
   clients: Observable<Client[]>;
   client: Observable<Client>;
 
-
-
   constructor(private afs: AngularFirestore) { 
-    this.clientsCollection = this.afs.collection<Client>('clients', ref => ref.orderBy('lastName', 'asc'));
+    this.clientsCollection = this.afs.collection('client', ref => ref.orderBy('lastName', 'asc'));
+    alert("stop");
+    console.log(this.clientsCollection);
   }
 
   getClients(): Observable<Client[]> {
@@ -28,7 +29,10 @@ export class ClientService {
       });
     }));
 
+    console.log("this.clients", this.clients);
+
     return this.clients;
+
   }
 
 }
