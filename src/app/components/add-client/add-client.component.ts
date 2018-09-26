@@ -3,6 +3,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { Client } from "../../models/Client";
 import { ClientService } from "../../services/client.service";
 import { Router } from "@angular/router";
+import { SettingsService } from "../../services/settings.service";
 
 @Component({
   selector: "app-add-client",
@@ -18,15 +19,18 @@ export class AddClientComponent implements OnInit {
     balance: 0
   };
 
-  disableBalanceOnAdd: boolean = true;
+  disableBalanceOnAdd: boolean;
 
   constructor(
     private flashMessage: FlashMessagesService,
     private clientService: ClientService,
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.disableBalanceOnAdd = this.settingsService.getSettings().disableBalanceOnAdd;
+  }
 
   onSubmit({ value, valid }: { value: Client; valid: boolean }) {
     console.log(value, valid);
@@ -49,7 +53,7 @@ export class AddClientComponent implements OnInit {
         timeout: 4000
       });
       // Redirect to dash
-      this.router.navigate(['/']);
+      this.router.navigate(["/"]);
     }
   }
 }
