@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes } from "@angular/router";
- 
+import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -17,9 +17,9 @@ const routes: Routes = [
   {path: 'client/add', component: AddClientComponent},
   {path: 'client/edit/:id', component: EditClientComponent},
   {path: 'client/:id', component: ClientDetailsComponent},
-  {path: 'client/settings', component: SettingsComponent},
+  {path: 'settings', component: SettingsComponent},
   {path: '**', component: NotFoundComponent},
-]
+];
 
 @NgModule({
   exports: [RouterModule],
